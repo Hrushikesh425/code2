@@ -37,7 +37,9 @@ const UserState = (props)=>{
                 if (data.success) {
                     localStorage.setItem('user', JSON.stringify(data.user));
                     localStorage.setItem('role', data.user.role);
-                    naviage('/home')
+                    if(localStorage.role === "admin"){
+                        naviage("/admin-home")
+                    }else{ naviage('/home')}
                 } else {
                     alert("User not found");
                 }

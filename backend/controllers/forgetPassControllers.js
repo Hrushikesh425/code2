@@ -24,6 +24,8 @@ exports.forgetPassController = async (req, res) => {
 
         user.password = secretPassword;
 
+        
+
         // save user
         const updatedUser = await user.save();
 

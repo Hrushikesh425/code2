@@ -17,7 +17,8 @@ function AddEvent() {
     eventDescription: "",
     eventBranch: "",
     eventDate: "",
-    eventTime: "",
+    endTime: "",
+    eventendTime: "",
     eventVenue: "",
     eventType: "",
     eventMode: "",
@@ -71,10 +72,12 @@ function AddEvent() {
               <Form.Group className="mb-3">
                 <Form.Label>Event Description</Form.Label>
                 <Form.Control
-                  onChange={handleOnChange}
-                  type="text"
-                  placeholder="Event Description"
+                  as="textarea"
                   name="eventDescription"
+                  type="textarea"
+                  placeholder="Event Description"
+                  rows={5}
+                  onChange={handleOnChange}
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -108,9 +111,18 @@ function AddEvent() {
                 <Form.Label>Event Time</Form.Label>
                 <Form.Control
                   onChange={handleOnChange}
-                  type="text"
+                  type="time"
                   placeholder="Event Time"
                   name="eventTime"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>End Time</Form.Label>
+                <Form.Control
+                  onChange={handleOnChange}
+                  type="time"
+                  placeholder="Event End Time"
+                  name="endTime"
                 />
               </Form.Group>
               <Form.Group className="mb-3">

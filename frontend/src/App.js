@@ -57,12 +57,12 @@ function ColorSchemesExample() {
             }></Route>
 
             <Route path="/adminevent/:eid" element={
-              <Protected isSignedIn={localStorage.getItem('token')} role={localStorage.getItem('role')} matchrole = "admin">
+              <Protected isSignedIn={localStorage.getItem('token')} role={localStorage.getItem('role')} matchrole="admin">
                 <AdminEventInfo />
               </Protected>}></Route>
 
             <Route path="/profile" element={
-              <ProtectedNormal isSignedIn={localStorage.getItem('token')} role={localStorage.getItem("role")} matchrole ="user" >
+              <ProtectedNormal isSignedIn={localStorage.getItem('token')} role={localStorage.getItem("role")} matchrole="user" >
                 <StudProfile />
               </ProtectedNormal>
             } />
@@ -87,6 +87,8 @@ function ColorSchemesExample() {
 
             <Route path="/admin-signup" element={<AdminSignup />}></Route>
             <Route path="/admin-login" element={<AdminLogin />}></Route>
+            <Route path="/admin-home" element={<AdminHome />}></Route>
+
 
             {/* <Route path="/payment/:eid" element={<RazorpayPayment />}></Route> */}
           </Routes>

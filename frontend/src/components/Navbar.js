@@ -29,6 +29,7 @@ function NavScrollExample() {
     localStorage.removeItem("user");
     navigate("/");
   };
+  const role = localStorage.role
 
   return (
     <Navbar bg="blue" expand="lg">
@@ -41,9 +42,12 @@ function NavScrollExample() {
             style={{ maxHeight: "500px" }}
             navbarScroll
           >
-            <Nav.Link href="/home">
-              <Button2>Home</Button2>
+            <Nav.Link as={Link} to="/home">
+                Home
             </Nav.Link>
+            {role==="admin"?<Nav.Link as={Link} to="/admin-home">
+                Admin-Home
+            </Nav.Link>:""}
             <Nav.Link as={Link} to="/userfeedback">Feedback</Nav.Link>
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -98,6 +102,7 @@ function NavScrollExample() {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            &nbsp;&nbsp;
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
                 Mode

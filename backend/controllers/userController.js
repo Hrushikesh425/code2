@@ -125,8 +125,8 @@ exports.signUpAdminController = async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const secretPassword = await bcrypt.hash(password, salt);
 
-    if(!email.includes("teacher"))
-      throw new Error("Only teachers can login")
+    // if(!email.includes("teacher"))
+    //   throw new Error("Only teachers can login")
 
     let generatedUsername = name.replace(/\s/g, "").toLowerCase()
     
