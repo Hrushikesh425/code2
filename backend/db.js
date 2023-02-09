@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
 const connectToMongo = () => {
-    mongoose.connect(process.env.MONGO_URL,
+    mongoose.connect("mongodb+srv://blogtrex:RYeHNWHRZCOGBCmk@cluster0.p1cqlha.mongodb.net/?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
             useUnifiedTopology: true

@@ -43,7 +43,6 @@ const UserFeedback = () => {
           console.log(data);
           if (data.success) {
             alert("Feedback Submitted");
-            navigate("/")
           } else {
             alert("Feedback not Submitted");
           }

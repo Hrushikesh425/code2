@@ -1,13 +1,29 @@
 const { FeedbackSchema } = require("../models/Feedback.Schema");
+const UserSchema = require("../models/User.Schema");
 
 const feedbackController = async(req, res) => {
     try{
+        
         const {name,email,department,message} = req.body;
+
+        const user = await UserSchema.findOne({
+           email
+        })
+
+        if( !user ){
+            console.log("----------- feedbackController.js: feedbackController: user is null---------");
+            res.json({
+                success:false,
+                message:"User not found"
+            })
+
+        }
         const feedback = FeedbackSchema.create({
             name,
             email,
             department,
-            message
+            message,
+            isAdmin:user.role === "admin" ? true : false
         })
 
         if( !feedback ){

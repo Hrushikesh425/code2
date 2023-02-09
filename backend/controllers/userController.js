@@ -77,6 +77,7 @@ exports.getUserController = async (req, res) => {
       return res.status(401).json({ message: 'User not found' });
     } else {
       res.json({
+        success: true,
         message: 'success',
         user: user
       })

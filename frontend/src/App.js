@@ -21,6 +21,8 @@ import AdminSignup from "./components/AdminSignup";
 import AdminLogin from "./components/AdminLogin";
 import Mode from "./components/Mode";
 import ForgetPassword from "./components/ForgetPassword";
+import Protected from "./components/Protected";
+import ProtectedNormal from "./components/ProtectedNormal";
 
 function ColorSchemesExample() {
   return (
@@ -48,15 +50,37 @@ function ColorSchemesExample() {
             <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
 
 
-            <Route path="/admin" element={<AdminHome />}></Route>
+            <Route path="/admin" element={
+              <Protected isSignedIn={localStorage.getItem('token')} role={localStorage.getItem('role')} matchrole="admin">
+                <AdminHome />
+              </Protected>
+            }></Route>
 
-            <Route path="/adminevent/:eid" element={<AdminEventInfo />}></Route>
+            <Route path="/adminevent/:eid" element={
+              <Protected isSignedIn={localStorage.getItem('token')} role={localStorage.getItem('role')} matchrole = "admin">
+                <AdminEventInfo />
+              </Protected>}></Route>
 
-            <Route path="/profile" element={<StudProfile />} />
+            <Route path="/profile" element={
+              <ProtectedNormal isSignedIn={localStorage.getItem('token')} role={localStorage.getItem("role")} matchrole ="user" >
+                <StudProfile />
+              </ProtectedNormal>
+            } />
 
-            <Route path="/department/:filter" element={<Deparment />} />
-            <Route path="/type/:filter" element={<EventType />} />
-            <Route path="/mode/:filter" element={<Mode />} />
+            <Route path="/department/:filter" element={
+              <ProtectedNormal isSignedIn={localStorage.getItem('token')} >
+                <Deparment />
+              </ProtectedNormal>} />
+            <Route path="/type/:filter" element={
+              <ProtectedNormal isSignedIn={localStorage.getItem('token')} >
+                <EventType />
+              </ProtectedNormal>
+            } />
+            <Route path="/mode/:filter" element={
+              <ProtectedNormal isSignedIn={localStorage.getItem('token')} >
+                <Mode />
+              </ProtectedNormal>}
+            />
 
             <Route path="/addevent" element={<AddEvent />}></Route>
             <Route path="/search/:search" element={<Search />}></Route>

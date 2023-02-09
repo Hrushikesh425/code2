@@ -46,6 +46,8 @@ export const StudProfile = () => {
   const [bookedEvents, setBookedEvents] = React.useState(null);
   const [show, setShow] = useState(false);
 
+  const role = localStorage.role
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -108,7 +110,7 @@ export const StudProfile = () => {
               <Container maxWidth="s">
                 <Box sx={{ bgcolor: "#ffffff", height: "55vh" }}>
                   <h1>
-                    <center>Student Info</center>
+                    <center>{role === "admin" ? "Admin" : "Student"} Info</center>
                   </h1>
                   <p>
                     <Grid container spacing={2}>
@@ -117,17 +119,17 @@ export const StudProfile = () => {
                           <List>
                             <ListItem>
                               <ListItemText>
-                                Student Name: {user?.name}
+                                {role==="admin" ? "Admin" : "Student"} Name: {user?.name}
                               </ListItemText>
                             </ListItem>
-                            <ListItem>
+                            {role === "admin" ? "" : <ListItem>
                               <ListItemText>
-                                Student ID: {user?.studentid}
+                                {role==="admin" ? "Admin" : "Student"} ID: {user?.studentid}
                               </ListItemText>
-                            </ListItem>
+                            </ListItem>}
                             <ListItem>
                               <ListItemText>
-                                Student Email: {user?.email}
+                                {role==="admin" ? "Admin" : "Student"} Email: {user?.email}
                               </ListItemText>
                             </ListItem>
                             <ListItem>
@@ -135,14 +137,14 @@ export const StudProfile = () => {
                                 Phone Number: {user?.phone}
                               </ListItemText>
                             </ListItem>
-                            <ListItem>
+                            {role === "admin" ? "" : <><ListItem>
                               <ListItemText>
                                 Branch: {user?.branch}
                               </ListItemText>
                             </ListItem>
-                            <ListItem>
-                              <ListItemText>Division: {user?.div}</ListItemText>
-                            </ListItem>
+                              <ListItem>
+                                <ListItemText>Division: {user?.div}</ListItemText>
+                              </ListItem></>}
                           </List>
                         </center>
                       </Grid>
