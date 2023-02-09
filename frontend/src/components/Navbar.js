@@ -15,11 +15,19 @@ function NavScrollExample() {
     setSearch(e.target.value);
   };
 
+  const token = localStorage.getItem("token");
+
   const navigate = useNavigate();
 
   const handleSearchEvent = (e) => {
     e.preventDefault();
     navigate(`/search/${search}`);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
   };
 
   return (
@@ -123,6 +131,8 @@ function NavScrollExample() {
               Search
             </Button>
           </Form>
+      
+          {token ? <Button style={{ marginLeft: "1%" }} onClick={()=>{handleLogout()}}>Logout</Button> : ""}
 
           <Button variant="outline-sucess">
             <NavLink to="/profile">
