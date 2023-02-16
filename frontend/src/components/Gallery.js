@@ -153,9 +153,6 @@ const Gallery = () => {
                 
             </div>}
             <div>
-
-
-
                 <Box sx={{ width: 500, minHeight: 829 }}>
                     <Masonry columns={3} spacing={2}>
                         {images?.map((item, index) => (

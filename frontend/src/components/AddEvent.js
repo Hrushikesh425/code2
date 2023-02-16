@@ -6,10 +6,16 @@ import { useContext, useState } from "react";
 import EventContext from "../context/event/EventContext";
 import { useNavigate } from "react-router-dom";
 import NavScrollExample from "./Navbar";
+import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from "@mui/material";
+import { GridExpandMoreIcon } from "@mui/x-data-grid";
 
 function AddEvent() {
   const eventcontext = useContext(EventContext);
   const { createEvent } = eventcontext;
+  const [venue, setvenue] = useState({
+    venueName: "",
+    venueAddress: "",
+  })
 
   const [event, setEvent] = useState({
     eventName: "",
@@ -29,7 +35,7 @@ function AddEvent() {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    createEvent({ ...event, image: image });
+    createEvent({ ...event, image: image,eventVenue:venue.venueName+"-"+venue.venueAddress });
     navigate("/home");
   };
 
@@ -134,21 +140,45 @@ function AddEvent() {
                   name="eventHeadVolunteer"
                 />
               </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Event Venue</Form.Label>
-                <Form.Select
-                  aria-label="Default select example"
-                  placeholder="Select Venue"
-                  name="eventVenue"
-                  onChange={handleOnChange}
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<GridExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
                 >
-                  <option>Select Venue</option>
-                  <option value="Classroom">Classroom</option>
-                  <option value="Lobby">Lobby</option>
-                  <option value="Lab">Lab</option>
-                  <option value="Seminar Hall">Seminar Hall</option>
-                </Form.Select>
-              </Form.Group>
+                  <Typography>Select Venue</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6} sm={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Select
+                          aria-label="Default select example"
+                          placeholder="Select Event Venue"
+                          name="eventVenue"
+                          onChange={(e) => { setvenue({ ...venue, venueName: e.target.value }) }}
+                        >
+                          <option>Select Event Mode</option>
+                          <option value="Classroom">Classroom</option>
+                          <option value="Lab">Lab</option>
+                        </Form.Select>
+                      </Form.Group>
+                    </Grid>
+                    <Grid item xs={6} sm={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Control
+                          onChange={(e) => { setvenue({ ...venue, venueAddress: e.target.value }) }}
+                          type="text"
+                          placeholder="Enter Name of Venue"
+                          name="eventVenue"
+                        />
+                      </Form.Group>
+                    </Grid>
+                  </Grid>
+
+                </AccordionDetails>
+              </Accordion>
+
               <Form.Group className="mb-3">
                 <Form.Label>Event Type</Form.Label>
                 <Form.Select
