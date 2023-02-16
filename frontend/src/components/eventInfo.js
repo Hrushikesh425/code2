@@ -106,6 +106,14 @@ export default function EventInfo() {
               <InteractiveList event={event}></InteractiveList>
             </Table>
           </Container>
+         
+          <Container maxWidth="sm">
+            <Box sx={{ bgcolor: "#fff0f0  ", height: "70vh", width: "70vh" }}>
+              <h2>Roll Of Volunteer kasa ahes re </h2>
+              <h3>{event?.eventRoll}</h3>
+            </Box>
+          </Container>
+          
 
           <Container maxWidth="sm">
             <Box sx={{ bgcolor: "#fff0f0  ", height: "70vh", width: "70vh" }}>

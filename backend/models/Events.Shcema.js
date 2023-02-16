@@ -10,6 +10,10 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    eventRoll: {
+      type: String,
+      required: true,
+    },
     eventDescription: {
       type: String,
       required: true,
@@ -50,6 +54,7 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    
     bookedUsers: [
       {
         type: mongoose.Types.ObjectId,

@@ -23,6 +23,7 @@ exports.createEventController = async (req, res) => {
       eventType,
       eventPrice,
       eventMode,
+      eventRoll,
     } = req.body;
 
     // const upImage = req.file
@@ -42,6 +43,7 @@ exports.createEventController = async (req, res) => {
       eventType,
       eventMode,
       eventPrice,
+      eventRoll,
       image,
     });
 

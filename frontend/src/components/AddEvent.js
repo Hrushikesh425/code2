@@ -28,6 +28,7 @@ function AddEvent() {
     eventVenue: "",
     eventType: "",
     eventMode: "",
+    eventRoll: ""
   });
   const [image, setImage] = useState(null);
 
@@ -82,6 +83,17 @@ function AddEvent() {
                   name="eventDescription"
                   type="textarea"
                   placeholder="Event Description"
+                  rows={5}
+                  onChange={handleOnChange}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Rolls</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  name="eventRoll"
+                  type="textarea"
+                  placeholder="Rolls"
                   rows={5}
                   onChange={handleOnChange}
                 />
