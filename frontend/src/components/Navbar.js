@@ -8,6 +8,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import Button2 from "@mui/material/Button";
 import { useState } from "react";
+import { Avatar } from "@mui/material";
 
 function NavScrollExample() {
   const [search, setSearch] = useState("");
@@ -30,6 +31,8 @@ function NavScrollExample() {
     navigate("/");
   };
   const role = localStorage.role
+  const email = localStorage.getItem("user") ? JSON.parse(localStorage.user).profilepic:"";
+  console.log(email)
 
   return (
     <Navbar bg="blue" expand="lg">
@@ -44,6 +47,9 @@ function NavScrollExample() {
           >
             <Nav.Link as={Link} to="/home">
                 Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/eventgallery">
+                Gallery
             </Nav.Link>
             {role==="admin"?<Nav.Link as={Link} to="/admin-home">
                 Admin-Home
@@ -141,7 +147,8 @@ function NavScrollExample() {
 
           <Button variant="outline-sucess">
             <NavLink to="/profile">
-              <AccountCircleRoundedIcon sx={{ fontSize: 55 }} />
+              <>
+              {email ? <Avatar src={`http://localhost:5000/public/profilepics/${email}`} sx={{ width: 50, height: 50 }} /> : <Avatar sx={{ width: 32, height: 32 }}><AccountCircleRoundedIcon /></Avatar>}</>
             </NavLink>
           </Button>
         </Navbar.Collapse>

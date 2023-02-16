@@ -25,6 +25,7 @@ const instance = new Razorpay({
 app.use("/api/v1/event", eventRouter);
 app.use("/api/v1/u", userRouter);
 app.use("/api/v1/feed", feedbackRouter);
+app.use("/api/v1/gallery",require("./controllers/galleryController"));
 app.get("/images/:imageName", (req, res) => {
   try {
     res.sendFile(
@@ -49,6 +50,8 @@ app.post("/api/v1/orders", async (req, res) => {
   res.json({ order });
 });
 
+app.use('/public/profilepics', express.static(__dirname + '/public/profilepics/'));
+app.use('/public/images', express.static(__dirname + '/public/images/'));
 app.listen(5000, () => {
   console.log("Server listening on port 5000");
 });

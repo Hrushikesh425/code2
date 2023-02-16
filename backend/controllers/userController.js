@@ -6,7 +6,7 @@ const Event = require('../models/Events.Shcema');
 
 exports.signUpUserController = async (req, res) => {
   try {
-    const { name, email, username, password, phone, div, studentid, branch, collegname } = req.body;
+    const { name, email, username, password, phone, div, studentid, branch, collegname,profilepic} = req.body;
 
     const salt = await bcrypt.genSalt(10);
     const secretPassword = await bcrypt.hash(password, salt);
@@ -20,9 +20,8 @@ exports.signUpUserController = async (req, res) => {
       div,
       studentid,
       branch,
-      collegname
-
-
+      collegname,
+      profilepic
     });
 
 

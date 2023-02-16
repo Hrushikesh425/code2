@@ -1,23 +1,70 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserContext from "../context/user/UserContext";
+import { Avatar, Button } from "@mui/material";
 
 function SignPage() {
 
   const userContext = useContext(UserContext);
-  const {signUp} = userContext;
+  const { signUp } = userContext;
 
-  const [user, setUser] = useState({name:"", username:"", email:"", password:"", phone:0, div:"", branch:"", studentid:"", collegname:"" });
+  const [user, setUser] = useState({ name: "", username: "", email: "", password: "", phone: 0, div: "", branch: "", studentid: "", collegname: "", profilepic: "" });
 
-  const handlSignUp = (e)=>{
+  const handlSignUp = async (e) => {
     e.preventDefault();
-    signUp(user)
+    // signup when image is uploaded
+    await handleSubmit();
+
+
   }
 
-  const handleOnChange = (e)=>{
-    setUser({...user, [e.target.name]:e.target.value});
+  const handleOnChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
     console.log(user)
   }
+
+  const [file, setfile] = useState("")
+
+  const [imageUrl, setImageUrl] = useState(null);
+
+
+
+
+  const handleFileChange = (event) => {
+    setfile(event.target.files[0]);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageUrl(reader.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+
+  const handleSubmit = () => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    fetch('http://localhost:5000/api/v1/u/profilepic/' + user.email, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (response.ok) {
+          response.json().then((data) => {
+            console.log(data);
+            signUp({ ...user, profilepic: data.filename });
+          })
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      }).catch(error => {
+        console.error('Error:', error);
+        return false;
+      })
+  };
+
+
+
 
   return (
     <>
@@ -27,77 +74,99 @@ function SignPage() {
             Sign Up
           </h2>
           <div className="flex flex-col text-gray-400 py-2">
+            <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+              {imageUrl ? (
+                <Avatar sx={{ width: 100, height: 100 }} src={imageUrl} alt="Profile Picture" />
+              ) : (
+                <Avatar sx={{ width: 100, height: 100 }} />
+              )}
+            </div>
+            <div className="flex flex-col text-gray-400 py-2">
+              <label htmlFor="file">Upload Formal Photo:</label>
+              <input
+                className="form-control-file mb-3"
+                type="file"
+                id="file"
+                name="formal_photo"
+                onChange={handleFileChange}
+              />
+
+
+            </div>
+          </div>
+          <div className="flex flex-col text-gray-400 py-2">
             <label>Name</label>
-            <input onChange= {handleOnChange} 
-            name="name"
+            <input onChange={handleOnChange}
+              name="name"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>Email</label>
-            <input onChange= {handleOnChange} 
-            name="email"
+            <input onChange={handleOnChange}
+              name="email"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>Username</label>
-            <input onChange= {handleOnChange} 
-            name="username"
+            <input onChange={handleOnChange}
+              name="username"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>College Name</label>
-            <input onChange= {handleOnChange} 
-            name="collegname"
+            <input onChange={handleOnChange}
+              name="collegname"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>Student Id</label>
-            <input onChange= {handleOnChange} 
-            name="studentid"
+            <input onChange={handleOnChange}
+              name="studentid"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>Branch</label>
-            <input onChange= {handleOnChange} 
-            name="branch"
+            <input onChange={handleOnChange}
+              name="branch"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>phone no</label>
-            <input onChange= {handleOnChange} 
-            name="phone"
+            <input onChange={handleOnChange}
+              name="phone"
               type="number"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>div</label>
-            <input onChange= {handleOnChange} 
-            name="div"
+            <input onChange={handleOnChange}
+              name="div"
               type="text"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
           <div className="flex flex-col text-gray-400 py-2">
             <label>Password</label>
-            <input onChange= {handleOnChange} 
-            name="password"
+            <input onChange={handleOnChange}
+              name="password"
               type="password"
               className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
             ></input>
           </div>
+
           {/* <div className="flex flex-col text-gray-400 py-2">
             <label>Confirm Password</label>
             <input onChange= {handleOnChange} 

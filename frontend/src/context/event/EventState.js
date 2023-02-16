@@ -66,7 +66,6 @@ const EventState = (props)=>{
             headers:{
                 'token':localStorage.getItem('token'),
                 'content-type': 'multipart/form-data',
-
             }
         });
         console.log(res.data)

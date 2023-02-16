@@ -13,6 +13,25 @@ const UserState = (props)=>{
         console.log(res);
         if(res.data.success)
             localStorage.setItem('token', res.data.token);
+            fetch("http://localhost:5000/api/v1/u/getUser", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "token": localStorage.getItem('token')
+                },
+
+            }).then((res) => res.json().then((data) => {
+                console.log(data);
+                if (data.success) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    localStorage.setItem('role', data.user.role);
+                    if(localStorage.role === "admin"){
+                        naviage("/admin-home")
+                    }else{ naviage('/home')}
+                } else {
+                    alert("User not found");
+                }
+            }))
             naviage('/home')
        }catch(err){
         console.log(err)

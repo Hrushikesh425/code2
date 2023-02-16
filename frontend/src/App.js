@@ -23,6 +23,7 @@ import Mode from "./components/Mode";
 import ForgetPassword from "./components/ForgetPassword";
 import Protected from "./components/Protected";
 import ProtectedNormal from "./components/ProtectedNormal";
+import Gallery from "./components/Gallery";
 
 function ColorSchemesExample() {
   return (
@@ -88,6 +89,7 @@ function ColorSchemesExample() {
             <Route path="/admin-signup" element={<AdminSignup />}></Route>
             <Route path="/admin-login" element={<AdminLogin />}></Route>
             <Route path="/admin-home" element={<AdminHome />}></Route>
+            <Route path="/eventgallery" element={<Gallery />} />
 
 
             {/* <Route path="/payment/:eid" element={<RazorpayPayment />}></Route> */}
